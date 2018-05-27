@@ -10,7 +10,7 @@ a
 aa
 aaa=100;
 
-bbb
+bbb=5;
 
 hello world
 
