@@ -8,7 +8,7 @@ hello world
 
 a
 aa
-aaa
+aaa=100;
 
 bbb
 
