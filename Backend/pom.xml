@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.allianz.sd</groupId>
+    <artifactId>TW</artifactId>
+    <version>1.0</version>
+     <packaging>jar</packaging>
+<!--    <packaging>war</packaging>-->
+
+    <name>Allianz SD</name>
+    <description>Allianz SD project for Spring Boot</description>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.1.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <profiles>
+
+        <profile>
+            <id>Local</id>
+<!--            <activation>-->
+<!--                &lt;!&ndash; this profile is active by default &ndash;&gt;-->
+<!--                <activeByDefault>true</activeByDefault>-->
+<!--            </activation>-->
+            <properties>
+                <server.port>8080</server.port>
+                <spring.datasource.url>jdbc:oracle:thin:@localhost:1521:orcl</spring.datasource.url>
+                <spring.datasource.username>SND</spring.datasource.username>
+                <spring.datasource.password>SND</spring.datasource.password>
+                <SND.APPUpdate.sql-dir>/opt/app/sql/</SND.APPUpdate.sql-dir>
+                <jwt.secret>1234567890123456789012345678901234567890123456789012345678901234</jwt.secret>
+                <jwt.expirationMin>1440</jwt.expirationMin>
+                <firebase.serverkey>AAAAIquSbZs:APA91bEs6GPhqLJ8XclRsjl-ukZ8amMz1wOqW3FeIZF5PDEw7Szufko3FijKE74WqN2S26HjjSpB9UxOUC5JC3ORAbYC4UrB527bguSsP9RijmR3jvV6JwQKX3YaNAxE1xZPvg2LfcNR</firebase.serverkey>
+            </properties>
+
+        </profile>
+
+        <profile>
+            <id>DEV</id>
+            <activation>
+                <!-- this profile is active by default -->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <properties>
+                <evn>DEV</evn>
+                <server.port>8080</server.port>
+                <spring.datasource.url>jdbc:oracle:thin:@192.168.0.159:1521:orcl</spring.datasource.url>
+                <spring.datasource.username>TWSNDDEV</spring.datasource.username>
+                <spring.datasource.password>ENC(xXyDyg26HmUOEbWum/3aYUZVTkoQzONn)</spring.datasource.password>
+                <jwt.secret>1234567890123456789012345678901234567890123456789012345678901234</jwt.secret>
+                <jwt.expirationMin>1440</jwt.expirationMin>
+                <firebase.serverkey>AAAAIquSbZs:APA91bEs6GPhqLJ8XclRsjl-ukZ8amMz1wOqW3FeIZF5PDEw7Szufko3FijKE74WqN2S26HjjSpB9UxOUC5JC3ORAbYC4UrB527bguSsP9RijmR3jvV6JwQKX3YaNAxE1xZPvg2LfcNR</firebase.serverkey>
+                <server.ssl.key-store-password>ENC(TgbntfQF1GDlmIiyeMy586vxA5iu1lnV)</server.ssl.key-store-password>
+            </properties>
+
+        </profile>
+
+        <profile>
+            <id>SIT</id>
+            <properties>
+                <evn>SIT</evn>
+                <server.port>8080</server.port>
+                <spring.datasource.url>jdbc:oracle:thin:@192.168.0.155:1521:orcl</spring.datasource.url>
+                <spring.datasource.username>TWSNDSIT</spring.datasource.username>
+                <spring.datasource.password>ENC(G7vALU8UZ1kF4Hj4PpYmnSaXTv+Agu17)</spring.datasource.password>
+                <jwt.secret>1234567890123456789012345678901234567890123456789012345678901234</jwt.secret>
+                <jwt.expirationMin>1440</jwt.expirationMin>
+                <firebase.serverkey>AAAAIquSbZs:APA91bEs6GPhqLJ8XclRsjl-ukZ8amMz1wOqW3FeIZF5PDEw7Szufko3FijKE74WqN2S26HjjSpB9UxOUC5JC3ORAbYC4UrB527bguSsP9RijmR3jvV6JwQKX3YaNAxE1xZPvg2LfcNR</firebase.serverkey>
+                <server.ssl.key-store-password>ENC(TgbntfQF1GDlmIiyeMy586vxA5iu1lnV)</server.ssl.key-store-password>
+            </properties>
+
+        </profile>
+
+        <profile>
+            <id>UAT</id>
+            <properties>
+                <evn>UAT</evn>
+                <server.port>443</server.port>
+                <spring.datasource.url>jdbc:oracle:thin:@10.83.156.77:1521:TESTDB</spring.datasource.url>
+                <spring.datasource.username>TAASND</spring.datasource.username>
+                <spring.datasource.password>ENC(am4Qq0Vu5A7XgGoGXmGJgQ==)</spring.datasource.password>
+                <jwt.secret>1234567890123456789012345678901234567890123456789012345678901234</jwt.secret>
+                <jwt.expirationMin>1440</jwt.expirationMin>
+                <firebase.serverkey>AAAAIquSbZs:APA91bEs6GPhqLJ8XclRsjl-ukZ8amMz1wOqW3FeIZF5PDEw7Szufko3FijKE74WqN2S26HjjSpB9UxOUC5JC3ORAbYC4UrB527bguSsP9RijmR3jvV6JwQKX3YaNAxE1xZPvg2LfcNR</firebase.serverkey>
+                <server.ssl.key-store-password>ENC(TgbntfQF1GDlmIiyeMy586vxA5iu1lnV)</server.ssl.key-store-password>
+            </properties>
+
+        </profile>
+
+        <profile>
+            <id>Prod</id>
+            <properties>
+                <evn>Prod</evn>
+                <server.port>443</server.port>
+                <spring.datasource.url>jdbc:oracle:thin:@192.168.0.155:1521:orcl</spring.datasource.url>
+                <spring.datasource.username>SND</spring.datasource.username>
+                <spring.datasource.password>SND</spring.datasource.password>
+                <jwt.secret>1234567890123456789012345678901234567890123456789012345678901234</jwt.secret>
+                <jwt.expirationMin>1440</jwt.expirationMin>
+                <firebase.serverkey>AAAAIquSbZs:APA91bEs6GPhqLJ8XclRsjl-ukZ8amMz1wOqW3FeIZF5PDEw7Szufko3FijKE74WqN2S26HjjSpB9UxOUC5JC3ORAbYC4UrB527bguSsP9RijmR3jvV6JwQKX3YaNAxE1xZPvg2LfcNR</firebase.serverkey>
+                <server.ssl.key-store-password>ENC(TgbntfQF1GDlmIiyeMy586vxA5iu1lnV)</server.ssl.key-store-password>
+            </properties>
+
+        </profile>
+    </profiles>
+
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <springfox-version>2.7.0</springfox-version>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-to-slf4j</artifactId>
+                </exclusion>
+
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+
+        </dependency>
+
+        <!-- jasypt -->
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+
+        <!-- Servlet -->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+
+
+        <!-- Logback -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.0</version>
+        </dependency>
+
+
+        <!-- JPA -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- Oracle Driver -->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc7</artifactId>
+            <version>12.1.0.1</version>
+        </dependency>
+
+        <!-- Connection-Pool -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+
+        <!--Swagger dependencies -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${springfox-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.joschi.jackson</groupId>
+            <artifactId>jackson-datatype-threetenbp</artifactId>
+            <version>2.6.4</version>
+        </dependency>
+
+        <!-- Quartz -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+            <version>2.1.2.RELEASE</version>
+        </dependency>
+
+        <!-- firebase -->
+        <dependency>
+            <groupId>com.google.firebase</groupId>
+            <artifactId>firebase-server-sdk</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+
+        <!-- JSON Parser -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20160810</version>
+        </dependency>
+
+        <!-- Log4j -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+
+        <!-- JWT -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.10.5</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>0.10.5</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>0.10.5</version>
+            <scope>runtime</scope>
+        </dependency>
+
+<!--        &lt;!&ndash; actuator &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-actuator</artifactId>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; Micormeter core dependecy  &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>io.micrometer</groupId>-->
+<!--            <artifactId>micrometer-core</artifactId>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; Micrometer Prometheus registry  &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>io.micrometer</groupId>-->
+<!--            <artifactId>micrometer-registry-prometheus</artifactId>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.allianz.sd</groupId>
+            <artifactId>core</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+
+        <finalName>${artifactId}</finalName>
+
+        <resources>
+
+            <!-- 將jsp copy to META-INF folder-->
+            <resource>
+                <directory>src/main/webapp</directory>
+                <targetPath>META-INF/views</targetPath>
+                <includes>
+                    <include>**/**</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <nonFilteredFileExtensions>
+                        <nonFilteredFileExtension>pem</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>cer</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>crt</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>p12</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>pfx</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
