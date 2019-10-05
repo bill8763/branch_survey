@@ -1,0 +1,61 @@
+<configuration scan="false" scanPeriod="60 seconds" debug="false">
+    <contextName>SND Logback</contextName>
+
+    <property name="log.dir" value="/opt/tomcat/logs"/>
+
+    <!--ConsoleAppender-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!--layout-->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d -1 %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <appender name="rollingLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${log.dir}/snd.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <maxHistory>7</maxHistory>
+            <maxFileSize>1MB</maxFileSize>
+            <totalSizeCap>100MB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d [%thread] %-5level %logger{36} %line - %msg%n</pattern>
+        </encoder>
+
+    </appender>
+
+    <appender name="rollingErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${log.dir}/snd-error.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <maxHistory>7</maxHistory>
+            <maxFileSize>1MB</maxFileSize>
+            <totalSizeCap>100MB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d [%thread] %-5level %logger{36} %line - %msg%n</pattern>
+        </encoder>
+
+    </appender>
+
+    <logger name="com.allianz.sd" level="TRACE" additivity="false">
+        <appender-ref ref="rollingLog"/>
+        <appender-ref ref="rollingErrorLog"/>
+    </logger>
+
+    <!--    <logger name="org.hibernate.type.descriptor.sql" level="trace">-->
+    <!--        <appender-ref ref="console" />-->
+    <!--    </logger>-->
+
+    <!--    <logger name="org.hibernate.SQL" level="debug" additivity="false">-->
+    <!--        <appender-ref ref="console"/>-->
+    <!--    </logger>-->
+
+    <root level="ERROR">
+        <appender-ref ref="console"/>
+    </root>
+</configuration>
